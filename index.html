@@ -28,16 +28,22 @@
 
         /*Chan zoom*/
         .popup {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-            z-index: 1; /* Sit on top */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black background with opacity */
+            z-index: 1;
+            /* Sit on top */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
         }
 
         /* Style the popup content */
@@ -47,6 +53,7 @@
             border-radius: 5px;
             text-align: center;
         }
+
         body {
             background-image: url(bg.jpg);
             background-repeat: no-repeat;
@@ -488,18 +495,46 @@
         function openPopup() {
             document.getElementById('myPopup').style.display = 'flex';
         }
-            // Function to close the popup
-            function closePopup() {
+        // Function to close the popup
+        function closePopup() {
             document.getElementById('myPopup').style.display = 'none';
         }
         function copyGiftCode() {
             console.log("copyGiftCode");
-            navigator.clipboard.writeText("2LS53Z04OG8D");
+            // navigator.clipboard.writeText("2LS53Z04OG8D");
             // alert("Copy Giftcode thành công, vào game nhập ngay thôi!");
-            openPopup();
-            setTimeout(() => {
-                closePopup();
-            }, 3000);
+
+
+
+            if (!navigator.clipboard) {
+                var textArea = document.createElement("textarea");
+                textArea.value = "2LS53Z04OG8D";
+                // Avoid scrolling to bottom
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    var successful = document.execCommand('copy');
+                    if (successful) {
+                        alert("Đã Copy Giftcode.\nVào game chơi ngay nào!");
+                    } else {
+                        alert("Lỗi Copy Gifcode.\nVui lòng nhập tay :(( ");
+                    }
+                } catch (err) {
+                    alert("Lỗi Copy Gifcode.\nVui lòng nhập tay :(( ");
+                }
+
+                document.body.removeChild(textArea);
+                return;
+            }
+            navigator.clipboard.writeText("2LS53Z04OG8D").then(function () {
+                alert("Đã Copy Giftcode.\nVào game chơi ngay nào!");
+            }, function (err) {
+                alert("Lỗi Copy Gifcode.\nVui lòng nhập tay :(( ");
+            });
         }
         function startTimer(duration, display) {
             var timer = duration,
@@ -580,7 +615,7 @@
                     }
                 }
             }
-           
+
     </script>
 </body>
 
