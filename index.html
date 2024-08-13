@@ -27,7 +27,26 @@
         }
 
         /*Chan zoom*/
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+            z-index: 1; /* Sit on top */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
 
+        /* Style the popup content */
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
         body {
             background-image: url(bg.jpg);
             background-repeat: no-repeat;
@@ -382,7 +401,12 @@
             <img src="banner.png" alt=""></a>
         </div>
     </div>
-
+    <div class="popup" id="myPopup">
+        <div class="popup-content">
+            <p>Copy Giftcode thành công. Vào game nhập ngay thôi!</p>
+            <!-- <button class="close-btn" onclick="closePopup()">Close</button> -->
+        </div>
+    </div>
     <div class="mobile">
         <img src="huongdan.png" alt=""></a>
     </div>
@@ -461,10 +485,21 @@
         }, {
             passive: false
         });
+        function openPopup() {
+            document.getElementById('myPopup').style.display = 'flex';
+        }
+            // Function to close the popup
+            function closePopup() {
+            document.getElementById('myPopup').style.display = 'none';
+        }
         function copyGiftCode() {
             console.log("copyGiftCode");
             navigator.clipboard.writeText("2LS53Z04OG8D");
-            alert("Copy Giftcode thành công, vào game nhập ngay thôi!");
+            // alert("Copy Giftcode thành công, vào game nhập ngay thôi!");
+            openPopup();
+            setTimeout(() => {
+                closePopup();
+            }, 3000);
         }
         function startTimer(duration, display) {
             var timer = duration,
@@ -514,10 +549,7 @@
         }
     </script>
     <script>
-        document.getElementById('btnCopyCode').addEventListener('click', function () {
-            console.log("Cai lon me click copy");
-            copyGiftCode();
-        });
+
         (function () {
 
             function c() {
@@ -548,7 +580,7 @@
                     }
                 }
             }
-        })();
+           
     </script>
 </body>
 
